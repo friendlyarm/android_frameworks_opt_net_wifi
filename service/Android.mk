@@ -40,7 +40,9 @@ include $(BUILD_STATIC_LIBRARY)
 
 # set correct hal library path
 # ============================================================
-LIB_WIFI_HAL := libwifi-hal
+ifeq ($(LIB_WIFI_HAL),)
+  LIB_WIFI_HAL := libwifi-hal
+endif
 
 ifeq ($(BOARD_WLAN_DEVICE), bcmdhd)
   LIB_WIFI_HAL := libwifi-hal-bcm
