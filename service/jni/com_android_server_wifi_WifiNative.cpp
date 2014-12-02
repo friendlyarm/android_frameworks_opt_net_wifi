@@ -806,6 +806,10 @@ void onLinkStatsResults(wifi_request_id id, wifi_iface_stat *iface_stat,
 }
 
 static jobject android_net_wifi_getLinkLayerStats (JNIEnv *env, jclass cls, jint iface)  {
+    if (iface < 0) {
+        ALOGE("android_net_wifi_getLinkLayerStats: iface is error:%d\n", iface);
+        return NULL;
+    }
 
     wifi_stats_result_handler handler;
     memset(&handler, 0, sizeof(handler));
