@@ -2291,6 +2291,13 @@ public final class WifiP2pServiceImpl extends IWifiP2pManager.Stub {
     }
 
     private void notifyInvitationReceived() {
+        if (mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_enableWifiP2pAutoAcceptInvitation)) {
+            if (DBG) logd(getName() + " auto accept invitation " + mSavedPeerConfig);
+            sendMessage(PEER_CONNECTION_USER_ACCEPT);
+            return;
+        }
+
         Resources r = Resources.getSystem();
         final WpsInfo wps = mSavedPeerConfig.wps;
         final View textEntryView = LayoutInflater.from(mContext)
