@@ -1008,6 +1008,10 @@ static jboolean android_net_wifi_cancelRange(
 
 static jboolean android_net_wifi_setScanningMacOui(JNIEnv *env, jclass cls,
         jint iface, jbyteArray param)  {
+    if (iface < 0) {
+        ALOGE("android_net_wifi_setScanningMacOui: iface is error:%d\n", iface);
+        return false;
+    }
 
     wifi_interface_handle handle = getIfaceHandle(env, cls, iface);
     ALOGD("setting scan oui %p", handle);
