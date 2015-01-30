@@ -6621,7 +6621,7 @@ public class WifiStateMachine extends StateMachine {
                     /* Tell autojoin the user did try to connect to that network */
                     mWifiAutoJoinController.updateConfigurationHistory(netId, true, true);
 
-                    mWifiConfigStore.setLastSelectedConfiguration(netId);
+                    mWifiConfigStore.setLastSelectedConfiguration(WifiConfiguration.INVALID_NETWORK_ID);
 
                     didDisconnect = false;
                     if (mLastNetworkId != WifiConfiguration.INVALID_NETWORK_ID
