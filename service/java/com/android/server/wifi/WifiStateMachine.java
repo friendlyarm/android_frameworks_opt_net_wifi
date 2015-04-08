@@ -6882,9 +6882,9 @@ public class WifiStateMachine extends StateMachine {
                 freqs.append(channel.toString());
                 first = false;
             }
-            //if (DBG) {
-            loge("WifiStateMachine starting scan for " + config.configKey() + " with " + freqs);
-            //}
+            if (DBG) {
+                loge("WifiStateMachine starting scan for " + config.configKey() + " with " + freqs);
+            }
             // Call wifi native to start the scan
             if (startScanNative(
                     WifiNative.SCAN_WITHOUT_CONNECTION_SETUP,
@@ -7037,13 +7037,13 @@ public class WifiStateMachine extends StateMachine {
                     deferMessage(message);
                     break;
                 case CMD_START_SCAN:
-                    //if (DBG) {
+                    if (DBG) {
                         loge("WifiStateMachine CMD_START_SCAN source " + message.arg1
                               + " txSuccessRate="+String.format( "%.2f", mWifiInfo.txSuccessRate)
                               + " rxSuccessRate="+String.format( "%.2f", mWifiInfo.rxSuccessRate)
                               + " targetRoamBSSID=" + mTargetRoamBSSID
                               + " RSSI=" + mWifiInfo.getRssi());
-                    //}
+                    }
                     if (message.arg1 == SCAN_ALARM_SOURCE) {
                         // Check if the CMD_START_SCAN message is obsolete (and thus if it should
                         // not be processed) and restart the scan if needed
