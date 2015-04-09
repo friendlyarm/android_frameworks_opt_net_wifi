@@ -464,6 +464,8 @@ public class WifiStateMachine extends StateMachine {
 
     static final int CMD_BLUETOOTH_ADAPTER_STATE_CHANGE   = BASE + 31;
 
+    static final int CMD_RELOAD_AP_CONFIG                 = BASE + 32;
+
     /* Supplicant commands */
     /* Is supplicant alive ? */
     static final int CMD_PING_SUPPLICANT                  = BASE + 51;
@@ -1960,6 +1962,10 @@ public class WifiStateMachine extends StateMachine {
         } else {
             sendMessage(CMD_STOP_AP);
         }
+    }
+
+    public void reloadWifiApConfiguration() {
+        mWifiApConfigChannel.sendMessage(CMD_RELOAD_AP_CONFIG, null);
     }
 
     public void setWifiApConfiguration(WifiConfiguration config) {

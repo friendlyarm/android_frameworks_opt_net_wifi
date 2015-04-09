@@ -21,17 +21,19 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.WifiScanner;
 import android.util.Log;
 import com.android.server.SystemService;
-
+import android.os.SystemProperties;
 import java.util.List;
 
 public final class WifiService extends SystemService {
 
     private static final String TAG = "WifiService";
     final WifiServiceImpl mImpl;
+    private boolean mDisableInstaboot = true;
 
     public WifiService(Context context) {
         super(context);
         mImpl = new WifiServiceImpl(context);
+        mDisableInstaboot = SystemProperties.getBoolean("config.disable_instaboot", true);
     }
 
     @Override
@@ -43,6 +45,10 @@ public final class WifiService extends SystemService {
     @Override
     public void onBootPhase(int phase) {
         if (phase == SystemService.PHASE_SYSTEM_SERVICES_READY) {
+            if (mDisableInstaboot) {
+                mImpl.checkAndStartWifi();
+            }
+        } else if (phase == SystemService.PHASE_INSTABOOT_RESTORED) {
             mImpl.checkAndStartWifi();
         }
     }

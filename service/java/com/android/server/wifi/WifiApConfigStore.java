@@ -108,6 +108,10 @@ class WifiApConfigStore extends StateMachine {
                         Log.e(TAG, "Try to setup AP config without SSID: " + message);
                     }
                     break;
+                case WifiStateMachine.CMD_RELOAD_AP_CONFIG:
+                    Log.i(TAG, "Reload Ap Config ");
+                    loadApConfiguration();
+                    break;
                 default:
                     return NOT_HANDLED;
             }
@@ -134,6 +138,10 @@ class WifiApConfigStore extends StateMachine {
                     break;
                 case WifiStateMachine.CMD_SET_AP_CONFIG_COMPLETED:
                     transitionTo(mInactiveState);
+                    break;
+                case WifiStateMachine.CMD_RELOAD_AP_CONFIG:
+                    Log.i(TAG, "Reload Ap Config ");
+                    loadApConfiguration();
                     break;
                 default:
                     return NOT_HANDLED;

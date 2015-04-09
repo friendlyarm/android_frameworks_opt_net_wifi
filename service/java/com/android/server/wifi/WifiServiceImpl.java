@@ -330,7 +330,9 @@ public final class WifiServiceImpl extends IWifiManager.Stub {
      */
     public void checkAndStartWifi() {
         /* Check if wi-fi needs to be enabled */
+        mSettingsStore.enableReadSavedStateAgain();
         boolean wifiEnabled = mSettingsStore.isWifiToggleEnabled();
+        mWifiStateMachine.reloadWifiApConfiguration();
         Slog.i(TAG, "WifiService starting up with Wi-Fi " +
                 (wifiEnabled ? "enabled" : "disabled"));
 
