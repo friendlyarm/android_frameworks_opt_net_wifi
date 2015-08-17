@@ -1583,7 +1583,7 @@ public class WifiAutoJoinController {
                             + config.configKey(true)
                             + " num reports " + config.numNoInternetAccessReports);
                 }
-                continue;
+                //continue;
             }
 
             if (DBG) {
