@@ -1965,7 +1965,8 @@ public class WifiStateMachine extends StateMachine {
     }
 
     public void reloadWifiApConfiguration() {
-        mWifiApConfigChannel.sendMessage(CMD_RELOAD_AP_CONFIG, null);
+        if (mWifiApConfigChannel != null)
+            mWifiApConfigChannel.sendMessage(CMD_RELOAD_AP_CONFIG, null);
     }
 
     public void setWifiApConfiguration(WifiConfiguration config) {
