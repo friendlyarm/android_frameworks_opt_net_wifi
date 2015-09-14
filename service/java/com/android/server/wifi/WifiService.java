@@ -23,6 +23,7 @@ import android.util.Log;
 import com.android.server.SystemService;
 import android.os.SystemProperties;
 import java.util.List;
+import java.io.File;
 
 public final class WifiService extends SystemService {
 
@@ -33,7 +34,8 @@ public final class WifiService extends SystemService {
     public WifiService(Context context) {
         super(context);
         mImpl = new WifiServiceImpl(context);
-        mDisableInstaboot = SystemProperties.getBoolean("config.disable_instaboot", true);
+        mDisableInstaboot = SystemProperties.getBoolean("config.disable_instaboot", true) ||
+                              !(new File("/system/bin/instabootserver").exists());
     }
 
     @Override
