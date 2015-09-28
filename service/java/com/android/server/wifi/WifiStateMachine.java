@@ -4943,12 +4943,13 @@ public class WifiStateMachine extends StateMachine {
             }
 
             if (mWifiApConfigChannel == null) {
-                mWifiApConfigChannel = new AsyncChannel();
+                AsyncChannel wifiApConfigChannel = new AsyncChannel();
                 WifiApConfigStore wifiApConfigStore = WifiApConfigStore.makeWifiApConfigStore(
                         mContext, getHandler());
                 wifiApConfigStore.loadApConfiguration();
-                mWifiApConfigChannel.connectSync(mContext, getHandler(),
+                wifiApConfigChannel.connectSync(mContext, getHandler(),
                         wifiApConfigStore.getMessenger());
+                mWifiApConfigChannel = wifiApConfigChannel;
             }
         }
         @Override
